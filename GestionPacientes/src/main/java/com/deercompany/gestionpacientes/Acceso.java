@@ -5,6 +5,7 @@
 package com.deercompany.gestionpacientes;
 
 import com.deercompany.database.Connector;
+import com.deercompany.notifications.Ayuda;
 import com.deercompany.query.FoundUser;
 import javax.swing.JOptionPane;
 
@@ -15,7 +16,7 @@ import javax.swing.JOptionPane;
 public class Acceso extends javax.swing.JFrame {
 
     Connector connector = new Connector();
-    
+
     /**
      * Creates new form Gestion
      */
@@ -39,7 +40,7 @@ public class Acceso extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jpf_password = new javax.swing.JPasswordField();
         jbtn_login = new javax.swing.JButton();
-        jbtn_register = new javax.swing.JButton();
+        jbtn_help = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Acceso");
@@ -58,8 +59,13 @@ public class Acceso extends javax.swing.JFrame {
             }
         });
 
-        jbtn_register.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jbtn_register.setText("Ayuda");
+        jbtn_help.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jbtn_help.setText("Ayuda");
+        jbtn_help.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_helpActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -81,7 +87,7 @@ public class Acceso extends javax.swing.JFrame {
                 .addGap(93, 93, 93)
                 .addComponent(jbtn_login)
                 .addGap(35, 35, 35)
-                .addComponent(jbtn_register)
+                .addComponent(jbtn_help)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -98,7 +104,7 @@ public class Acceso extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtn_login)
-                    .addComponent(jbtn_register))
+                    .addComponent(jbtn_help))
                 .addGap(28, 28, 28))
         );
 
@@ -109,15 +115,27 @@ public class Acceso extends javax.swing.JFrame {
         FoundUser foundUser = new FoundUser();
         String username = jtf_username.getText();
         String password = jpf_password.getText();
-        
-        if (foundUser.searchActiveUser(username, password)) {
-            JOptionPane.showMessageDialog(null, "Acceso concedido");
-            clearTextField();
+
+        if (username.trim().equals("") || password.trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Uno de los campos esta vacio");
         } else {
-            JOptionPane.showMessageDialog(null, "Datos incorrectos");
-            clearTextField();
+            if (foundUser.searchActiveUser(username, password)) {
+                JOptionPane.showMessageDialog(null, "Acceso concedido");
+                clearTextField();
+                MenuPrincipal menu = new MenuPrincipal();
+                setVisible(false);
+                menu.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Datos incorrectos");
+                clearTextField();
+            }
         }
     }//GEN-LAST:event_jbtn_loginActionPerformed
+
+    private void jbtn_helpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_helpActionPerformed
+        Ayuda panel = new Ayuda();
+        panel.setVisible(true);
+    }//GEN-LAST:event_jbtn_helpActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,17 +172,17 @@ public class Acceso extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void clearTextField() {
         this.jtf_username.setText("");
         this.jpf_password.setText("");
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton jbtn_help;
     private javax.swing.JButton jbtn_login;
-    private javax.swing.JButton jbtn_register;
     private javax.swing.JPasswordField jpf_password;
     private javax.swing.JTextField jtf_username;
     // End of variables declaration//GEN-END:variables

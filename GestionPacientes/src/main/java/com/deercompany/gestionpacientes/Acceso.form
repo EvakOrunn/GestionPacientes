@@ -44,7 +44,7 @@
               <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
               <Component id="jbtn_login" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-              <Component id="jbtn_register" min="-2" max="-2" attributes="0"/>
+              <Component id="jbtn_help" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -65,7 +65,7 @@
               <EmptySpace pref="42" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jbtn_login" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jbtn_register" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbtn_help" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
           </Group>
@@ -104,13 +104,16 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtn_loginActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jbtn_register">
+    <Component class="javax.swing.JButton" name="jbtn_help">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Liberation Sans" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Ayuda"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtn_helpActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
