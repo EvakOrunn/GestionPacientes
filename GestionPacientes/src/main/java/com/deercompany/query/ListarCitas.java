@@ -14,15 +14,15 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author evak
  */
-public class ListUsers {
+public class ListarCitas {
 
     private PreparedStatement statement;
     private ResultSet resultSet;
     private final Connector CONNECTOR;
-    private final String SQL_QUERY = "SELECT * FROM usuarios";
+    private final String SQL_QUERY = "SELECT cit_id AS ID, obrasocial.obr_razonsocial AS 'OBRA SOCIAL', cit_apellido AS APELLIDO, cit_nombre AS NOMBRE, cit_fecha AS TURNO FROM cita JOIN obrasocial ON cita.obr_id = obrasocial.obr_id WHERE cit_fecha = DATE(NOW());";
     private DefaultTableModel DT;
     
-    public ListUsers() {
+    public ListarCitas() {
         statement = null;
         CONNECTOR = new Connector();
     }
@@ -36,9 +36,10 @@ public class ListUsers {
             
         };
         DT.addColumn("ID");
-        DT.addColumn("Username");
-        DT.addColumn("Password");
-        DT.addColumn("Active");
+        DT.addColumn("OBRA SOCIAL");
+        DT.addColumn("APELLIDO");
+        DT.addColumn("NOMBRE");
+        DT.addColumn("TURNO");
         return DT;
     }
     
@@ -47,12 +48,13 @@ public class ListUsers {
             setTitulosInventario();
             statement = CONNECTOR.getConnection().prepareStatement(SQL_QUERY);
             resultSet = statement.executeQuery();
-            Object[] fila = new Object[4];
+            Object[] fila = new Object[5];
             while(resultSet.next()){
                 fila[0] = resultSet.getInt(1);
                 fila[1] = resultSet.getString(2);
                 fila[2] = resultSet.getString(3);
-                fila[3] = resultSet.getBoolean(4);
+                fila[3] = resultSet.getString(4);
+                fila[4] = resultSet.getDate(5);
                 DT.addRow(fila);
             }
         } catch (SQLException e) {

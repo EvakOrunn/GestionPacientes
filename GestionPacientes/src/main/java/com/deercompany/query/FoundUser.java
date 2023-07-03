@@ -19,7 +19,7 @@ public class FoundUser {
     private PreparedStatement statement;
     private ResultSet resultSet;
     private final Connector CONNECTION;
-    private final String SQL_QUERY = "SELECT * FROM usuarios WHERE username = ? AND password = ?";
+    private final String SQL_QUERY = "SELECT * FROM usuario WHERE usu_username = ? AND usu_password = ?";
 
     public FoundUser() {
         this.CONNECTION = new Connector();
@@ -58,7 +58,7 @@ public class FoundUser {
             resultSet = statement.executeQuery();
             
             if (resultSet.next()) {
-                found = resultSet.getBoolean("active");
+                found = resultSet.getBoolean("usu_active");
             }
             return found;
         } catch (SQLException e) {

@@ -16,9 +16,9 @@ import javax.swing.JOptionPane;
 public class Connector {
     
     private Connection connection;
-    private final String URL = "jdbc:mysql://db4free.net:3306/gestiondbt";
-    private final String USER = "nova02";
-    private final String PASSWORD = "Pascal261";
+    private final String URL = "jdbc:mysql://localhost:3306/gestion";
+    private final String USER = "root";
+    private final String PASSWORD = "Loreto_1";
     
     public Connector() {
         this.connection = null;
